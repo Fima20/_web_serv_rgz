@@ -4,6 +4,9 @@ import argparse
 import os
 import json
 
+import sys
+sys.path.append("..")
+
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from flask_cors import CORS, cross_origin
 

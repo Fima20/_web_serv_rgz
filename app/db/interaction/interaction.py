@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 from ..app.db.client.client import MySQLConnection
 from ..app.db.models.models import User, Bas, Product, Base
 import json
