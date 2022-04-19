@@ -1,8 +1,8 @@
 # from app.db.client.client import MySQLConnection
 # from app.db.models.models import User, Bas, Product, Base
 
-from .... import app.db.client.client.MySQLConnection as MySQLConnection
-from .... import app.db.models.models.User, Bas, Product, Base
+from ....app.db.client.client import MySQLConnection
+from ....app.db.models.models import User, Bas, Product, Base
 import json
 
 
