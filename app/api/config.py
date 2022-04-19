@@ -1,0 +1,10 @@
+SERVER_HOST = '0.0.0.0'
+SERVER_PORT = 5005
+DB_HOST = '127.0.0.1'
+DB_PORT = 5006
+DB_USER = 'root'
+DB_PASSWORD = 'pass'
+DB_NAME = 'some_mysql'
+SHUTDOWN_PASS = 'ANTINIKITA'
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+UPLOAD_FOLDER = 'static/'
