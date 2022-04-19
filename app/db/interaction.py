@@ -1,5 +1,5 @@
-from app.db.client.client import MySQLConnection
-from app.db.models.models import User, Bas, Product, Base
+from client import MySQLConnection
+from models import User, Bas, Product, Base
 import json
 
 
