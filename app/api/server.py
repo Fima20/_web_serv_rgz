@@ -7,7 +7,7 @@ import json
 from flask import Flask, flash, request, redirect, url_for, render_template, send_from_directory
 from flask_cors import CORS, cross_origin
 
-from app.db.interaction.interaction import DbInteraction
+from db.interaction.interaction import DbInteraction
 from utils import config_parser, allowed_file
 from config import SERVER_HOST, SERVER_PORT, DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, SHUTDOWN_PASS, UPLOAD_FOLDER
 from werkzeug.utils import secure_filename
