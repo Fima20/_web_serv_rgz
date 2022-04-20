@@ -90,13 +90,13 @@ class Server:
         if 'image' not in nrequest.files:
             flash('No file part')
             return redirect(nrequest.url)
-        file = nrequest.files['image'].read()
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(nrequest.url)
+        file = nrequest.files['image']
+        # if file.filename == '':
+        #     flash('No selected file')
+        #     return redirect(nrequest.url)
         filename = secure_filename(file.filename)
         output = open(f'{UPLOAD_FOLDER}{filename}', 'wb')
-        output.write(file)
+        output.write(file.read())
         output.close()
         return str(f'{UPLOAD_FOLDER}{filename}')
         # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
