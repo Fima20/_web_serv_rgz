@@ -82,24 +82,24 @@ class Server:
             return redirect(nrequest.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            res = send_from_directory(UPLOAD_FOLDER, filename)
+            return str(f'{UPLOAD_FOLDER}{filename}')
+
+    def file_image_linux(self, nrequest):
+        if 'image' not in nrequest.files:
+            flash('No file part')
+            return redirect(nrequest.url)
+        file = nrequest.files['image']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(nrequest.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
             _file_path = f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}'
             file.save(os.path.join(_file_path, filename))
             res = send_from_directory(_file_path, filename)
             return str(f'{UPLOAD_FOLDER}{filename}')
-
-    # def file_image(self, nrequest):
-    #     if 'image' not in nrequest.files:
-    #         flash('No file part')
-    #         return redirect(nrequest.url)
-    #     file = nrequest.files['image']
-    #     # if file.filename == '':
-    #     #     flash('No selected file')
-    #     #     return redirect(nrequest.url)
-    #     filename = secure_filename(file.filename)
-    #     with open(f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}{filename}', "w") as f:
-    #         f.write(file)
-    #     return str(f'{UPLOAD_FOLDER}{filename}')
-    #     # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
 
     def upload_file(self):
         try:
@@ -183,7 +183,7 @@ class Server:
         try:
             name = str(request.form.get('name'))
             price = int(request.form.get('price'))
-            file_url = self.file_image(request)
+            file_url = self.file_image_linux(request)
             description = str(request.form.get('description'))
             if not isinstance(file_url, str): file_url = ''
             get_product = self.db_interaction.add_product_info(
@@ -217,7 +217,7 @@ class Server:
         try:
             name = str(request.form.get('name'))
             price = int(request.form.get('price'))
-            file_url = self.file_image(request)
+            file_url = self.file_image_linux(request)
             description = str(request.form.get('description'))
             self.db_interaction.edit_product_info(
                 id=id,
