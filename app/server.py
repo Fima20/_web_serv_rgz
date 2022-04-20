@@ -95,8 +95,8 @@ class Server:
         #     flash('No selected file')
         #     return redirect(nrequest.url)
         filename = secure_filename(file.filename)
-        with open(f'{UPLOAD_FOLDER}{filename}', "w") as f:
-            f.write(file.content)
+        with open(f'{UPLOAD_FOLDER}{filename}', "wb") as f:
+            f.write(file)
         return str(f'{UPLOAD_FOLDER}{filename}')
         # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
 
