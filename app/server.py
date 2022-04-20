@@ -96,7 +96,7 @@ class Server:
         #     return redirect(nrequest.url)
         filename = secure_filename(file.filename)
         output = open(f'{UPLOAD_FOLDER}{filename}', 'wb')
-        output.write(file.read())
+        output.write(file)
         output.close()
         return str(f'{UPLOAD_FOLDER}{filename}')
         # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
