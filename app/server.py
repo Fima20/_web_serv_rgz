@@ -90,7 +90,7 @@ class Server:
         # if 'image' not in nrequest.files:
         #     flash('No file part')
         #     return redirect(nrequest.url)
-        # file = nrequest.files['image']
+        file = nrequest.files['image']
         # if file.filename == '':
         #     flash('No selected file')
         #     return redirect(nrequest.url)
