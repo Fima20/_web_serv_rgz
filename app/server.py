@@ -95,10 +95,10 @@ class Server:
             flash('No selected file')
             return redirect(nrequest.url)
         filename = secure_filename(file.filename)
+        print(filename, f'{UPLOAD_FOLDER}{filename}', file.filename)
         output = open(f'{UPLOAD_FOLDER}{filename}', 'wb')
         output.write(file)
         output.close()
-
         return str(f'{UPLOAD_FOLDER}{filename}')
 
     def upload_file(self):
