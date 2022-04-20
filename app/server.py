@@ -82,7 +82,7 @@ class Server:
             return redirect(nrequest.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            _file_path = f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}{filename}'
+            _file_path = f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}'
             file.save(os.path.join(_file_path, filename))
             res = send_from_directory(_file_path, filename)
             return str(f'{UPLOAD_FOLDER}{filename}')
