@@ -192,10 +192,11 @@ class Server:
                 image=file_url,
                 description=description
             )
+            raise
             return get_product, 201, file_url
         except Exception as e:
             print(f"ERROR add_product_info {e}")
-            return f"Error {e} Request [POST] /add_product_info/ Parameters: name:str, price:int, description:str, image:file "
+            return f"Error {file_url} Request [POST] /add_product_info/ Parameters: name:str, price:int, description:str, image:file "
 
     def get_product_info_id(self, id):
         try:
