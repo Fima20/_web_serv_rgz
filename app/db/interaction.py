@@ -32,14 +32,14 @@ class DbInteraction:
             Base.metadata.tables['user'].create(self.engine)
 
     def create_table_bas(self):
-        if not self.engine.dialect.has_table(self.engine, 'bas'):
+        if not inspect(self.engine).has_table(self.engine, 'bas'):
             Base.metadata.tables['bas'].create(self.engine)
         else:
             self.mysql_connection.execute_query('DROP TABLE IF EXISTS bas')
             Base.metadata.tables['bas'].create(self.engine)
 
     def create_table_product(self):
-        if not self.engine.dialect.has_table(self.engine, 'product'):
+        if not inspect(self.engine).has_table(self.engine, 'bas'):
             Base.metadata.tables['product'].create(self.engine)
         else:
             self.mysql_connection.execute_query('DROP TABLE IF EXISTS product')
