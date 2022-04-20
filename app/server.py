@@ -98,8 +98,8 @@ class Server:
         output = open(f'{UPLOAD_FOLDER}{filename}', 'wb')
         output.write(file)
         output.close()
-        # return str(f'{UPLOAD_FOLDER}{filename}')
-        return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
+        return str(f'{UPLOAD_FOLDER}{filename}')
+        # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
 
     def upload_file(self):
         try:
@@ -183,7 +183,7 @@ class Server:
         try:
             name = str(request.form.get('name'))
             price = int(request.form.get('price'))
-            file_url = self.file_image_linux(request)
+            file_url = self.file_image(request)
             description = str(request.form.get('description'))
             if not isinstance(file_url, str): file_url = ''
             get_product = self.db_interaction.add_product_info(
@@ -217,7 +217,7 @@ class Server:
         try:
             name = str(request.form.get('name'))
             price = int(request.form.get('price'))
-            file_url = self.file_image_linux(request)
+            file_url = self.file_image(request)
             description = str(request.form.get('description'))
             self.db_interaction.edit_product_info(
                 id=id,
