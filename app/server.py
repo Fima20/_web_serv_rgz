@@ -192,7 +192,7 @@ class Server:
                 image=file_url,
                 description=description
             )
-            return get_product, 201
+            return get_product, 201, file_url
         except Exception as e:
             print(f"ERROR add_product_info {e}")
             return f"Error {e} Request [POST] /add_product_info/ Parameters: name:str, price:int, description:str, image:file "
