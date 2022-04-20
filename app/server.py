@@ -72,33 +72,34 @@ class Server:
     def get_home(self):
         return "Hello, world. Its server"
 
-    # def file_image(self, nrequest):
-    #     if 'image' not in nrequest.files:
-    #         flash('No file part')
-    #         return redirect(nrequest.url)
-    #     file = nrequest.files['image']
-    #     if file.filename == '':
-    #         flash('No selected file')
-    #         return redirect(nrequest.url)
-    #     if file and allowed_file(file.filename):
-    #         filename = secure_filename(file.filename)
-    #         file.save(os.path.join(self.app.config['UPLOAD_FOLDER'], filename))
-    #         res = send_from_directory(self.app.config["UPLOAD_FOLDER"], filename)
-    #         return str(f'{UPLOAD_FOLDER}{filename}')
-
     def file_image(self, nrequest):
         if 'image' not in nrequest.files:
             flash('No file part')
             return redirect(nrequest.url)
         file = nrequest.files['image']
-        # if file.filename == '':
-        #     flash('No selected file')
-        #     return redirect(nrequest.url)
-        filename = secure_filename(file.filename)
-        with open(f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}{filename}', "w") as f:
-            f.write(file)
-        return str(f'{UPLOAD_FOLDER}{filename}')
-        # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(nrequest.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            _file_path = f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}{filename}'
+            file.save(os.path.join(_file_path, filename))
+            res = send_from_directory(_file_path, filename)
+            return str(f'{UPLOAD_FOLDER}{filename}')
+
+    # def file_image(self, nrequest):
+    #     if 'image' not in nrequest.files:
+    #         flash('No file part')
+    #         return redirect(nrequest.url)
+    #     file = nrequest.files['image']
+    #     # if file.filename == '':
+    #     #     flash('No selected file')
+    #     #     return redirect(nrequest.url)
+    #     filename = secure_filename(file.filename)
+    #     with open(f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}{filename}', "w") as f:
+    #         f.write(file)
+    #     return str(f'{UPLOAD_FOLDER}{filename}')
+    #     # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
 
     def upload_file(self):
         try:
