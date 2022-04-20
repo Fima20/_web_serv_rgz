@@ -23,7 +23,7 @@ class Server:
             port=db_port,
             password=password,
             name_db=name_db,
-            rebuild_db=True,
+            rebuild_db=False,
             user=user
         )
 
@@ -77,8 +77,6 @@ class Server:
             flash('No file part')
             return redirect(nrequest.url)
         file = nrequest.files['image']
-        # if user does not select file, browser also
-        # submit an empty part without filename
         if file.filename == '':
             flash('No selected file')
             return redirect(nrequest.url)
@@ -87,6 +85,20 @@ class Server:
             file.save(os.path.join(self.app.config['UPLOAD_FOLDER'], filename))
             res = send_from_directory(self.app.config["UPLOAD_FOLDER"], filename)
             return str(f'{UPLOAD_FOLDER}{filename}')
+
+    def file_image_linux(self, nrequest):
+        if 'image' not in nrequest.files:
+            flash('No file part')
+            return redirect(nrequest.url)
+        file = nrequest.files['image']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(nrequest.url)
+        file_object = nrequest.get(file_url)
+        filename = secure_filename(file.filename)
+        with open(f'{UPLOAD_FOLDER}{filename}', 'wb') as local_file:
+            local_file.write(file_object.content)
+        return str(f'{UPLOAD_FOLDER}{filename}')
 
     def upload_file(self):
         try:
@@ -170,7 +182,7 @@ class Server:
         try:
             name = str(request.form.get('name'))
             price = int(request.form.get('price'))
-            file_url = self.file_image(request)
+            file_url = self.file_image_linux(request)
             description = str(request.form.get('description'))
             if not isinstance(file_url, str): file_url = ''
             get_product = self.db_interaction.add_product_info(
@@ -204,7 +216,7 @@ class Server:
         try:
             name = str(request.form.get('name'))
             price = int(request.form.get('price'))
-            file_url = self.file_image(request)
+            file_url = self.file_image_linux(request)
             description = str(request.form.get('description'))
             self.db_interaction.edit_product_info(
                 id=id,
