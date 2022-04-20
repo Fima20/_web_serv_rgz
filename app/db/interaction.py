@@ -1,6 +1,8 @@
 from .client import MySQLConnection
 from .models import User, Bas, Product, Base
+from sqlalchemy import inspect
 import json
+
 
 
 class DbInteraction:
@@ -23,7 +25,7 @@ class DbInteraction:
             self.create_table_bas()
 
     def create_table_users(self):
-        if not self.engine.dialect.has_table(self.engine, 'user'):
+        if not inspect(self.engine).has_table(self.engine, 'user'):
             Base.metadata.tables['user'].create(self.engine)
         else:
             self.mysql_connection.execute_query('DROP TABLE IF EXISTS user')

@@ -23,7 +23,7 @@ class Server:
             port=db_port,
             password=password,
             name_db=name_db,
-            rebuild_db=False,
+            rebuild_db=True,
             user=user
         )
 
