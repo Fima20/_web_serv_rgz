@@ -87,15 +87,14 @@ class Server:
             return str(f'{UPLOAD_FOLDER}{filename}')
 
     def file_image_linux(self, nrequest):
-        if 'image' not in nrequest.files:
-            flash('No file part')
-            return redirect(nrequest.url)
-        file = nrequest.files['image']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(nrequest.url)
+        # if 'image' not in nrequest.files:
+        #     flash('No file part')
+        #     return redirect(nrequest.url)
+        # file = nrequest.files['image']
+        # if file.filename == '':
+        #     flash('No selected file')
+        #     return redirect(nrequest.url)
         filename = secure_filename(file.filename)
-        print(filename, f'{UPLOAD_FOLDER}{filename}', file.filename)
         output = open(f'{UPLOAD_FOLDER}{filename}', 'wb')
         output.write(file)
         output.close()
