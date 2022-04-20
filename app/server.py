@@ -94,10 +94,11 @@ class Server:
         if file.filename == '':
             flash('No selected file')
             return redirect(nrequest.url)
-        file_object = nrequest.get(file_url)
         filename = secure_filename(file.filename)
-        with open(f'{UPLOAD_FOLDER}{filename}', 'wb') as local_file:
-            local_file.write(file_object.content)
+        output = open('test.xls', 'wb')
+        output.write(file)
+        output.close()
+
         return str(f'{UPLOAD_FOLDER}{filename}')
 
     def upload_file(self):
