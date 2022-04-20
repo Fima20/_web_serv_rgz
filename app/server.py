@@ -72,21 +72,21 @@ class Server:
     def get_home(self):
         return "Hello, world. Its server"
 
-    def file_image(self, nrequest):
-        if 'image' not in nrequest.files:
-            flash('No file part')
-            return redirect(nrequest.url)
-        file = nrequest.files['image']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(nrequest.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(self.app.config['UPLOAD_FOLDER'], filename))
-            res = send_from_directory(self.app.config["UPLOAD_FOLDER"], filename)
-            return str(f'{UPLOAD_FOLDER}{filename}')
+    # def file_image(self, nrequest):
+    #     if 'image' not in nrequest.files:
+    #         flash('No file part')
+    #         return redirect(nrequest.url)
+    #     file = nrequest.files['image']
+    #     if file.filename == '':
+    #         flash('No selected file')
+    #         return redirect(nrequest.url)
+    #     if file and allowed_file(file.filename):
+    #         filename = secure_filename(file.filename)
+    #         file.save(os.path.join(self.app.config['UPLOAD_FOLDER'], filename))
+    #         res = send_from_directory(self.app.config["UPLOAD_FOLDER"], filename)
+    #         return str(f'{UPLOAD_FOLDER}{filename}')
 
-    def file_image_linux(self, nrequest):
+    def file_image(self, nrequest):
         if 'image' not in nrequest.files:
             flash('No file part')
             return redirect(nrequest.url)
@@ -95,7 +95,7 @@ class Server:
         #     flash('No selected file')
         #     return redirect(nrequest.url)
         filename = secure_filename(file.filename)
-        with open(f'{UPLOAD_FOLDER}{filename}', "wb") as f:
+        with open(f'/root/_web_serv_rgz/app/{UPLOAD_FOLDER}{filename}', "wb") as f:
             f.write(file)
         return str(f'{UPLOAD_FOLDER}{filename}')
         # return f"{file.filename}, {filename}, {UPLOAD_FOLDER}{filename}, {file}"
