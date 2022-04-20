@@ -95,7 +95,7 @@ class Server:
             flash('No selected file')
             return redirect(nrequest.url)
         filename = secure_filename(file.filename)
-        output = open('test.xls', 'wb')
+        output = open(f'{UPLOAD_FOLDER}{filename}', 'wb')
         output.write(file)
         output.close()
 
